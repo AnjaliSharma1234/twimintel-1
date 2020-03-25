@@ -59,7 +59,7 @@ def update_output_div(n_click,q,a,c):
         and Contents  is "{}"
     '''.format(q, a,c)
   
-create_table()
+
 
 
 if __name__ == '__main__':
