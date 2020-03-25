@@ -10,6 +10,9 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__ , external_stylesheets=external_stylesheets)
 
+conn = sqlite3.connect('example.db')
+c=conn.cursor()
+c.execute('''CREATE TABLE  IF NOT EXISTS twimm( questions TEXT ,answers TEXT, content TEXT)''')
 
 app.layout = html.Div([
     html.H1(children="Twimbit NLP Preprocessor"),
@@ -43,14 +46,10 @@ app.layout = html.Div([
 
 
 
-def create_table():
-  conn = sqlite3.connect('example.db')
-  c=conn.cursor()
-  c.execute('''CREATE TABLE  IF NOT EXISTS twimm( questions TEXT ,answers TEXT, content TEXT)''')
+
 
 def update_output_div(n_click,q,a,c):
-  print(q)
-  
+ 
   c.execute("INSERT INTO twimm (questions,answers,content) VALUES (?,?,?)",(q,a,c))
   conn.commit()
   return '''
