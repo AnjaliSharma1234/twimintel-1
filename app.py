@@ -3,9 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output,State
 import dash_table
-
-
-
+import sqlite3
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -18,25 +16,17 @@ app.layout = html.Div([
     html.H1(children="Dashboard"),
     html.Label('Question' ),
     dcc.Input(id='q',value=' ',type='text'),
-    
-    html.Div(id='my-q'),
 
 
     html.Label('Answer' ),
     dcc.Input(id='a',value=' ',type='text'),
-    
-    html.Div(id='my-a'),
-
     html.Label('Content' ),
+
     dcc.Input(id='c',value=' ',type='text'),
     
-    html.Div(id='my-c'),
-    
-    html.Div([
-    	html.Button('Prepare Book', id="prepare")]),
-                    
-    
-    			
+   html.Button(id='submit-button', n_clicks=0, children='Submit'),
+   html.Div(id='my-q'),
+          
     
 
     
@@ -45,30 +35,34 @@ app.layout = html.Div([
 @app.callback(
     Output(component_id='my-q', component_property='children'),
     
-    [Input(component_id='q', component_property='value')],
-    
-)
-
-@app.callback(
-    Output(component_id='my-a', component_property='children'),
-    
-    [Input(component_id='a', component_property='value')],
-    
-)
-
-@app.callback(
-    Output(component_id='my-c', component_property='children'),
-    
-    [Input(component_id='c', component_property='value')],
-    
-)
+    [Input('submit-button', 'n_clicks')],
+    [State(component_id='q', component_property='value'),
+    State(component_id='a', component_property='value'),
+    State(component_id='c', component_property='value')])
 
 
 
-def update_output_div(input_value):
-    return 'You\'ve entered "{}"'.format(input_value)
+
+def create_table():
+  conn = sqlite3.connect('example.db')
+  c=conn.cursor()
+  c.execute('''CREATE TABLE  IF NOT EXISTS twimm( questions TEXT ,answers TEXT, content TEXT)''')
+
+def update_output_div(n_click,q,a,c):
+  print(q)
+  
+  c.execute("INSERT INTO twimm (questions,answers,content) VALUES (?,?,?)",(q,a,c))
+  conn.commit()
+  return '''
+        The Button has been pressed {} times,
+        Question is "{}",
+        and Answer  is "{}"
+        and Contents  is "{}"
+    '''.format(q, a,c)
+  
+create_table()
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+  app.run_server(debug=True)
     
