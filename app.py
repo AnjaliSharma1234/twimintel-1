@@ -35,22 +35,7 @@ app.layout = html.Div([
     html.Div([
     	html.Button('Prepare Book', id="prepare")]),
                     
-    dash_table.DataTable(
-    	id="data",
-    	columns=[{
-    	"id":"q",
-    	"name":"Questions",
-    	"type":"text"
-    	},{
-    	"id":"a",
-    	"name":"Answers",
-    	"type":"text"
-    	},{
-    	"id":"c",
-    	"name":"Contents",
-    	"type":"text"
-    	}],
-    	editable=True)
+    
     			
     
 
