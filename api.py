@@ -22,9 +22,9 @@ def api_all():
     conn = sqlite3.connect('twimAI_dataset.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    all_books = cur.execute('SELECT * FROM twimm;').fetchall()
+    all_data = cur.execute('SELECT * FROM twimm;').fetchall()
 
-    return jsonify(all_books)
+    return jsonify(all_data)
 
 
 
