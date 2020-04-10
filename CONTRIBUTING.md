@@ -101,3 +101,4 @@ This Code of Conduct is adapted from the [Contributor Covenant](http://contribut
 * Easy visualization of data by graphs.
 
 ### Approach
+![approach](approach.png)
