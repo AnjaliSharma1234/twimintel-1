@@ -93,3 +93,11 @@ Project maintainers who do not follow or enforce the Code of Conduct in good fai
 ### Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant](http://contributor-covenant.org), [version 1.4](http://contributor-covenant.org/version/1/4/).
+
+### Goal
+
+* Twimintel is a system where a researcher can gather relative information about their query and easily analyze the data.
+* Twimintel helps researcher to write best out of best research paper easily without opening the hundreds of tabs.
+* Easy visualization of data by graphs.
+
+### Approach
